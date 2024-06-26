@@ -1,0 +1,25 @@
+---
+- name: Configure MOTD
+  hosts: STG_HAPROXY
+  tasks:
+    - name: Copy MOTD file to remote hosts
+      copy:
+        src: files/motd_msg.txt
+        dest: /etc/motd
+        owner: root
+        group: root
+        mode: 0644
+
+    - name: Ensure MOTD is configured
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        line: "PrintMotd yes"
+        state: present
+        backup: yes
+      notify: Restart SSH
+
+  handlers:
+    - name: Restart SSH
+      service:
+        name: sshd
+        state: restarted
