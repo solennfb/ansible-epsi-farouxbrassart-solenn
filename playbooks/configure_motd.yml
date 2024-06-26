@@ -1,0 +1,16 @@
+---
+- name: Configure Message of the Day (motd)
+  hosts: STG_HAPROXY
+  become: yes
+  tasks:
+    - name: Ensure the motd file is present
+      copy:
+        content: |
+          ***********************************************
+          * Welcome to {{ ansible_hostname }}           *
+          * Managed by Ansible                          *
+          ***********************************************
+        dest: /etc/motd
+        owner: root
+        group: root
+        mode: '0644'
