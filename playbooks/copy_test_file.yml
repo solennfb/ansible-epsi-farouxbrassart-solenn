@@ -5,14 +5,14 @@
   tasks:
     - name: Ensure the destination directory exists
       file:
-        path: ./root/
+        path: ./test
         state: directory
         mode: '0755'
 
     - name: Copy the test file
       copy:
         src: ./files/test.txt
-        dest: ./root/test.txt
+        dest: ./test/test.txt
         owner: root
         group: root
         mode: '0644'
