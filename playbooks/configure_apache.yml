@@ -1,0 +1,23 @@
+---
+- name: Déployer la page d'accueil Apache
+  hosts: STG_HAPROXY
+  become: yes
+  tasks:
+    - name: Installer Apache
+      apt:
+        name: apache2
+        state: present
+        update_cache: yes
+
+    - name: Copier la page d'accueil personnalisée
+      template:
+        src: ../templates/index.html.j2
+        dest: /var/www/html/index.html
+        owner: www-data
+        group: www-data
+        mode: '0644'
+
+    - name: Redémarrer Apache pour appliquer les changements
+      service:
+        name: apache2
+        state: restarted

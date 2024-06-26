@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page d'accueil Apache</title>
+</head>
+<body>
+    <h1>Bienvenue sur le serveur Apache</h1>
+    <p>Cette page a été déployée via Ansible.</p>
+    <p>Nom du serveur : {{ inventory_hostname }}</p>
+    <p>Adresse IP : {{ ansible_default_ipv4.address }}</p>
+</body>
+</html>
