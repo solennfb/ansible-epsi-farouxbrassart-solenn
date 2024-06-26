@@ -1,0 +1,18 @@
+---
+- name: Copy test file to remote servers
+  hosts: STG_HAPROXY
+  become: yes
+  tasks:
+    - name: Ensure the destination directory exists
+      file:
+        path: ./root/
+        state: directory
+        mode: '0755'
+
+    - name: Copy the test file
+      copy:
+        src: ./files/test.txt
+        dest: ./root/test.txt
+        owner: root
+        group: root
+        mode: '0644'
